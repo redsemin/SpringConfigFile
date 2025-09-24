@@ -43,7 +43,7 @@ spring:
     redis:
       flush-mode: on_save
 server:
-  port: 11000
+  port: 13000
   servlet:
     context-path: /
     session:
@@ -56,7 +56,7 @@ eureka:
       defaultZone: http://localhost:8761/eureka
 management:
   server:
-    port: 11001
+    port: 13001
     address: localhost
   endpoints:
     web:
