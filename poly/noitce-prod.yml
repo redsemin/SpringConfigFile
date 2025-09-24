@@ -16,14 +16,17 @@ spring:
         use-second-level-cache: true
         region:
           factory_class: org.hibernate.cache.ehcache.EhCacheRegionFactory
-      generate-statistics: true
     open-in-view: false
     show-sql: true
     properties:
       hibernate:
         format_sql: true
         use_sql_comments: true
-      javax.persistence.sharedCache.mode: ENABLE_SELECTIVE
+        generate_statistics: true
+      javax:
+        persistence:
+          sharedCache:
+            mode: ENABLE_SELECTIVE
   thymeleaf:
     cache: false
     check-template-location: true
@@ -39,26 +42,18 @@ spring:
     store-type: redis
     redis:
       flush-mode: on_save
-  cloud:
-    config:
-      import: "optional:configserver:http://localhost:8888/"
-      name: myproject
-      profile: dev
-
 server:
   port: 11000
   servlet:
     context-path: /
     session:
       timeout: 600
-
 eureka:
   client:
     register-with-eureka: true
     fetch-registry: true
     service-url:
       defaultZone: http://localhost:8761/eureka
-
 management:
   server:
     port: 11001
