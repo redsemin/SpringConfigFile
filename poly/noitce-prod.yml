@@ -1,0 +1,77 @@
+spring:
+  profiles:
+    active: prod
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://192.168.80.128:3306/myDB
+    username: poly
+    password: 1234
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      cache:
+        use-second-level-cache: true
+        region:
+          factory_class: org.hibernate.cache.ehcache.EhCacheRegionFactory
+      generate-statistics: true
+    open-in-view: false
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        use_sql_comments: true
+      javax.persistence.sharedCache.mode: ENABLE_SELECTIVE
+  thymeleaf:
+    cache: false
+    check-template-location: true
+    prefix: classpath:/templates/
+    suffix: .html
+  application:
+    name: SPRING-JPA-PRJ
+  redis:
+    host: 192.168.80.128
+    port: 6379
+    password: 1234
+  session:
+    store-type: redis
+    redis:
+      flush-mode: on_save
+  cloud:
+    config:
+      import: "optional:configserver:http://localhost:8888/"
+      name: myproject
+      profile: dev
+
+server:
+  port: 11000
+  servlet:
+    context-path: /
+    session:
+      timeout: 600
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+management:
+  server:
+    port: 11001
+    address: localhost
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      enabled: true
+      show-details: always
+    beans:
+      enabled: true
+    info:
+      enabled: true
