@@ -21,3 +21,22 @@ spring:
     driver-class-name: org.mariadb.jdbc.Driver
     username: poly
     url: jdbc:mariadb://192.168.80.128:3306/myDB
+
+server:
+  port: 13000
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      enabled: true
+      show-details: always
+    beans:
+      enabled: true
+    info:
+      enabled: true
+  server:
+    address: localhost
+    port: 13001
